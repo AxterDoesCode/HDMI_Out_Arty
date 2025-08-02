@@ -1,4 +1,4 @@
-TOPFILE   ?= src_BSV/TMDS_encoder.bsv
+TOPFILE   ?= src_BSV/dvi.bsv
 TOPMODULE ?= mkTMDS_encoder
 BSCDIRS_VSIM = -bdir build_v  -info-dir build_v  -vdir verilog
 
@@ -9,8 +9,7 @@ verilog:
 	mkdir -p $@
 
 compile: build_v verilog
-	# bsc -verilog -g mkTop src_BSV/Top.bsv
-	bsc -u -verilog $(BSCDIRS_VSIM) -g $(TOPMODULE) $(TOPFILE)
+	bsc --show-range-conflict -u -verilog $(BSCDIRS_VSIM) -g $(TOPMODULE) $(TOPFILE)
 
 build:
 	vivado -mode batch -nolog -nojournal -source build.tcl
@@ -19,3 +18,7 @@ build:
 
 program:
 	openFPGALoader -b arty_z7_20 bitstream.bit
+program_working:
+	openFPGALoader -b arty_z7_20 working.bit
+verilate:
+	verilator --trace -cc --exe --build fpga4fun_encoder_tb.cpp fpga4fun_encoder.v -Wno-WIDTHEXPAND -Wno-UNOPTFLAT

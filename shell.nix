@@ -11,6 +11,7 @@
    xorg.libXi xorg.libXft xorg.libxcb xorg.libxcb
    freetype fontconfig glib gtk2 gtk3
    graphviz gcc unzip nettools
+   verilator python3
  ]
   );
   runScript = ''
