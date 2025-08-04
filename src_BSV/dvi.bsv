@@ -80,6 +80,7 @@ module mkTMDS_encoder (IEncoder);
                 end
             end
         end
+        // For some reason the bits in the DVI 1.0 spec online didn't work but these HDMI spec ones did
         else begin // !(DE == HIGH)
             cnt [0] <= 0;
             q_out = case (cd)
